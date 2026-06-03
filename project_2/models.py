@@ -13,11 +13,11 @@ class Project(models.Model):
 
 class Task(models.Model):
     class Status(models.TextChoices):
-        NEW = 'new', 'New',
-        IN_PROGRESS = 'in_progress', 'In progress',
-        COMPLETED = 'completed', 'Completed',
-        CLOSED = 'closed', 'Closed',
-        PENDING = 'pending', 'Pending',
+        NEW = 'new', 'New'
+        IN_PROGRESS = 'in_progress', 'In progress'
+        COMPLETED = 'completed', 'Completed'
+        CLOSED = 'closed', 'Closed'
+        PENDING = 'pending', 'Pending'
         BLOCKED = 'blocked', 'Blocked'
 
     class Priority(models.TextChoices):
@@ -33,11 +33,14 @@ class Task(models.Model):
     )
 
     description = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=15, default=Status.NEW, choices=Status.choices)    # type: ignore
-    priority = models.CharField(max_length=15, choices=Priority.choices)                    # type: ignore
+    status = models.CharField(max_length=15,choices=Status.choices, default=Status.NEW)             # type: ignore
+    priority = models.CharField(max_length=15, choices=Priority.choices, default=Priority.MEDIUM)   # type: ignore
 
     project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='tasks')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
