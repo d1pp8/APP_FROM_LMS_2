@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
+from django.db.models import ManyToManyField
 
 
 class Project(models.Model):
@@ -32,6 +33,8 @@ class Task(models.Model):
         validators=[MinLengthValidator(10)],
     )
 
+    tags = ManyToManyField('Tag', null=True, blank=True, related_name='tasks')
+
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=15,choices=Status.choices, default=Status.NEW)             # type: ignore
     priority = models.CharField(max_length=15, choices=Priority.choices, default=Priority.MEDIUM)   # type: ignore
@@ -44,3 +47,10 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=25, unique=True)
+
+    def __str__(self):
+        return self.tag_name
