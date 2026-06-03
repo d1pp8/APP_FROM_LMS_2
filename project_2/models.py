@@ -8,6 +8,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    files = models.ManyToManyField('ProjectFile', related_name='projects')
 
     def __str__(self):
         return self.name
@@ -68,7 +69,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Task'
         verbose_name_plural = 'Tasks'
-        ordering = ['due_date', 'assignee']
+        ordering = ['-due_date', 'assignee']
         unique_together = (('title','project'),)
 
 
@@ -77,3 +78,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.tag_name
+
+class ProjectFile(models.Model):
+    name = models.CharField(max_length=120)
+    file = models.FileField(upload_to='projects/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
