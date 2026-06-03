@@ -12,6 +12,11 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['-name']
+        verbose_name = 'Project'
+        verbose_name_plural = 'Projects'
+        unique_together = (('name', 'created_at'),)
 
 class Task(models.Model):
     class Status(models.TextChoices):
@@ -58,6 +63,8 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 
 class Tag(models.Model):
