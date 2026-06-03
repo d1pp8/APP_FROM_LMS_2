@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.db.models import ManyToManyField
+from django.contrib.auth.models import User
 
 
 class Project(models.Model):
@@ -46,7 +47,15 @@ class Task(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     due_date = models.DateTimeField(null=True,blank=True)
-    
+
+    assignee = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='tasks'
+    )
+
     def __str__(self):
         return self.title
 
