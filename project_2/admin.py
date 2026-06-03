@@ -44,3 +44,6 @@ class ProjectFileAdmin(admin.ModelAdmin):
         'file',
         'created_at'
     ]
+
+    search_fields = ['name']
+    list_filter = ['created_at']

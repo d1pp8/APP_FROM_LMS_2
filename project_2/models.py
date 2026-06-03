@@ -86,3 +86,8 @@ class ProjectFile(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Project File'
+        verbose_name_plural = 'Project Files'
+        ordering = ['-created_at']
