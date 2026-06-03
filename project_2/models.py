@@ -18,6 +18,7 @@ class Project(models.Model):
         verbose_name_plural = 'Projects'
         unique_together = (('name', 'created_at'),)
 
+
 class Task(models.Model):
     class Status(models.TextChoices):
         NEW = 'new', 'New'
@@ -64,7 +65,11 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
-
+    class Meta:
+        verbose_name = 'Task'
+        verbose_name_plural = 'Tasks'
+        ordering = ['due_date', 'assignee']
+        unique_together = (('title','project'),)
 
 
 class Tag(models.Model):
