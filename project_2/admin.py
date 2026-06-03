@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Project, Task, Tag
+from .models import Project, Task, Tag, ProjectFile
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -35,3 +35,12 @@ class TaskAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['tag_name']
+
+
+@admin.register(ProjectFile)
+class ProjectFileAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'file',
+        'created_at'
+    ]
