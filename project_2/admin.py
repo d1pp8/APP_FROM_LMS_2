@@ -19,7 +19,8 @@ class TaskAdmin(admin.ModelAdmin):
         'status',
         'priority',
         'created_at',
-        'due_date'
+        'due_date',
+        'assignee'
     ]
     search_fields = ['title']
     list_filter = [
