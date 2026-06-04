@@ -29,6 +29,14 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = ['status', 'priority', 'project', 'created_at', 'due_date']
 
+    def change_tasks_status_on_completed(self, request, objects):
+        for obj in objects:
+            obj.status = 'completed'
+            obj.save()
+        return objects
+
+    change_tasks_status_on_completed.short_description = 'Change status on Completed'
+    actions = ['change_tasks_status_on_completed']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
