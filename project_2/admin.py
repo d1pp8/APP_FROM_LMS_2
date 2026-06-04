@@ -6,10 +6,15 @@ from .models import Project, Task, Tag, ProjectFile
 class ProjectAdmin(admin.ModelAdmin):
     list_display = [
         'name',
+        'display_count_of_files',
         'created_at',
     ]
     search_fields = ['name']
 
+    def display_count_of_files(self, obj):
+        return obj.count_of_files
+
+    display_count_of_files.short_description = 'Count of Files'
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):

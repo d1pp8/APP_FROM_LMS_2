@@ -19,6 +19,10 @@ class Project(models.Model):
         verbose_name_plural = 'Projects'
         unique_together = (('name', 'created_at'),)
 
+    @property
+    def count_of_files(self):
+        return self.files.count()
+
 
 class Task(models.Model):
     class Status(models.TextChoices):
