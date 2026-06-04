@@ -35,8 +35,44 @@ class TaskAdmin(admin.ModelAdmin):
             obj.save()
         return objects
 
+    def change_priority_on_low(self, request, objects):
+        for obj in objects:
+            obj.priority = 'low'
+            obj.save()
+        return objects
+
+    def change_priority_on_medium(self, request, objects):
+        for obj in objects:
+            obj.priority = 'medium'
+            obj.save()
+        return objects
+
+    def change_priority_on_high(self, request, objects):
+        for obj in objects:
+            obj.priority = 'high'
+            obj.save()
+        return objects
+
+    def change_priority_on_very_high(self, request, objects):
+        for obj in objects:
+            obj.priority = 'very_high'
+            obj.save()
+        return objects
+
     change_tasks_status_on_completed.short_description = 'Change status on Completed'
-    actions = ['change_tasks_status_on_completed']
+    change_priority_on_low.short_description = 'Mark as Low priority'
+    change_priority_on_medium.short_description = 'Mark as Medium priority'
+    change_priority_on_high.short_description = 'Mark as High priority'
+    change_priority_on_very_high.short_description = 'Mark as Very-High priority'
+
+    actions = [
+        'change_tasks_status_on_completed',
+        'change_priority_on_low',
+        'change_priority_on_medium',
+        'change_priority_on_high',
+        'change_priority_on_very_high'
+    ]
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
